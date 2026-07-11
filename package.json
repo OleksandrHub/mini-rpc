@@ -1,0 +1,32 @@
+{
+  "name": "mini-rpc-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Zero-dependency RPC framework for JS/TS based on JSON-RPC 2.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "echo \"no tests yet\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OleksandrHub/mini-rpc.git"
+  },
+  "keywords": [
+    "rpc",
+    "json-rpc",
+    "typescript",
+    "proxy"
+  ],
+  "author": "Oleksandr Klishch",
+  "license": "MIT",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/OleksandrHub/mini-rpc/issues"
+  },
+  "homepage": "https://github.com/OleksandrHub/mini-rpc#readme",
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}
