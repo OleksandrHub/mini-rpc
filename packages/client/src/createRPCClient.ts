@@ -1,6 +1,7 @@
 import type { RPCRequest, RPCResponse } from "@mini-rpc/core";
+import type { Promisify } from "./router.js";
 
-export function createRPCClient(url: string) {
+export function createRPCClient<TAPI extends object>(url: string) {
   return new Proxy(
     {},
     {
@@ -29,5 +30,5 @@ export function createRPCClient(url: string) {
         };
       },
     },
-  );
+  ) as Promisify<TAPI>;
 }
