@@ -12,8 +12,6 @@ export function readBody(req: IncomingMessage): Promise<string> {
       resolve(data);
     });
 
-    req.on("error", (err) => {
-      reject(err);
-    });
+    req.on("error", reject);
   });
 }
