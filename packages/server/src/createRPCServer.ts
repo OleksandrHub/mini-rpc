@@ -34,14 +34,14 @@ export function createRPCServer<TAPI extends object>(
   }
 
   const server = createServer(async (req, res) => {
-    if (typesPath && getTypesAPI(req, res, typesPath)) {
-      return;
-    }
-
     setCorsHeaders(res);
 
     if (req.method === "OPTIONS") {
       res.writeHead(204).end();
+      return;
+    }
+
+    if (typesPath && getTypesAPI(req, res, typesPath)) {
       return;
     }
 

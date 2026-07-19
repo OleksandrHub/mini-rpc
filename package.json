@@ -7,7 +7,9 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "npm run test --workspaces --if-present"
+    "test": "npm run test --workspaces --if-present",
+    "demo-server": "npx tsx --experimental-strip-types ./packages/server/src/demo/run.ts",
+    "demo-client": "npx tsx --experimental-strip-types ./packages/client/src/demo/console-app.ts"
   },
   "repository": {
     "type": "git",

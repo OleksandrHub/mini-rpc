@@ -16,7 +16,7 @@ export declare const api: {
         remove: (id: number) => {
             id: number;
             name: string;
-        } | undefined;
+        };
     };
     posts: {
         get: (id: number) => {
@@ -38,7 +38,6 @@ export declare const api: {
             id: number;
             userId: number;
             title: string;
-        } | undefined;
+        };
     };
 };
-//# sourceMappingURL=api.d.ts.map
