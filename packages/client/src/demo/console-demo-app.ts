@@ -1,6 +1,8 @@
 import { createRPCClient } from "../createRPCClient.js";
-import type { API } from "../router.js";
+import type { api } from "./api.types.d.ts";
 import * as readline from "node:readline/promises";
+
+type API = typeof api;
 
 const client = createRPCClient<API>("http://localhost:3000");
 
