@@ -1,17 +1,17 @@
-export interface RPCRequest {
+export interface RPCRequest<P extends unknown[] = unknown[]> {
   jsonrpc: '2.0';
   method: string;
-  params?: any[];
+  params?: P;
   id?: string | number | null;
 }
 
-export interface RPCResponse {
+export interface RPCResponse<R = unknown> {
   jsonrpc: '2.0';
-  result?: any;
+  result?: R;
   error?: {
     code: number;
     message: string;
-    data?: any;
+    data?: unknown;
   };
   id?: string | number | null;
 }

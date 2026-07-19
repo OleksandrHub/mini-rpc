@@ -8,8 +8,8 @@ import {
   getTypesAPI,
 } from "./router.js";
 
-export function createRPCServer(
-  api: Record<string, any>,
+export function createRPCServer<TAPI extends object>(
+  api: TAPI,
   port: number,
   addTypesAPI: boolean = true,
 ) {
@@ -49,16 +49,21 @@ export function createRPCServer(
         return;
       }
 
-      const result = fn(...((request.params as any[]) ?? []));
+      const result = fn(...(request.params ?? []));
       response.result = result;
 
       res.setHeader("Content-Type", "application/json");
       res.end(JSON.stringify(response));
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const code =
+        typeof (error as { code?: unknown })?.code === "number"
+          ? (error as { code: number }).code
+          : -32603;
+      const message = error instanceof Error ? error.message : String(error);
       const response: RPCResponse = {
         jsonrpc: "2.0",
         id: request.id ?? null,
-        error: { code: error.code || -32603, message: error.message },
+        error: { code, message },
       };
 
       res.setHeader("Content-Type", "application/json");

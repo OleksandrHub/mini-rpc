@@ -1,6 +1,6 @@
 import type { RPCRequest, RPCResponse } from "@mini-rpc/core";
 
-export function buildProxy(url: string, path: string[] = []): any {
+export function buildProxy(url: string, path: string[] = []): unknown {
   return new Proxy(function () {}, {
     get(target, prop) {
       const newPath = [...path, String(prop)];

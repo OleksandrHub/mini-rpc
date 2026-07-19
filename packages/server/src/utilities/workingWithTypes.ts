@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { execSync } from "node:child_process";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import type { IncomingMessage, ServerResponse } from "node:http";
 
 const AUTH_TOKEN = process.env.MINI_RPC_AUTH_TOKEN;
 
@@ -26,7 +27,10 @@ export function ensureTypesCompiled() {
   }
 }
 
-export function getTypesAPI(req: any, res: any): boolean {
+export function getTypesAPI(
+  req: IncomingMessage,
+  res: ServerResponse,
+): boolean {
   if (req.method === "GET" && req.url === "/_internal/types") {
     const token = req.headers["x-cli-auth-token"];
     if (token !== AUTH_TOKEN) {
