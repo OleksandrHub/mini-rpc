@@ -7,8 +7,7 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "echo \"no tests yet\" && exit 0",
-    "pull-types": "node scripts/pull-types.js"
+    "test": "echo \"no tests yet\" && exit 0"
   },
   "repository": {
     "type": "git",

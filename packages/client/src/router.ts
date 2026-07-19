@@ -1,2 +1,2 @@
-export * from './utilities/promisify.js';
-export * from './utilities/api.interface.js';
+export * from "./utilities/promisify.js";
+export * from "./utilities/buildProxy.js";
