@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { resolveMethod } from "../router.js";
+import { resolveMethod } from "./index.js";
 
 describe("resolveMethod", () => {
   const api = {

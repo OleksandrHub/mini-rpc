@@ -6,7 +6,7 @@ import {
   resolveMethod,
   ensureTypesCompiled,
   getTypesAPI,
-} from "./router.js";
+} from "./utilities/index.js";
 
 export function createRPCServer<TAPI extends object>(
   api: TAPI,
