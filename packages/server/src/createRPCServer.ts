@@ -30,7 +30,20 @@ export function createRPCServer<TAPI extends object>(
     }
 
     const data = await readBody(req);
-    const request: RPCRequest = JSON.parse(data);
+    let request: RPCRequest;
+    try {
+      request = JSON.parse(data);
+    } catch {
+      const response: RPCResponse = {
+        jsonrpc: "2.0",
+        id: null,
+        error: { code: -32700, message: "Parse error" },
+      };
+      res.setHeader("Content-Type", "application/json");
+      res.end(JSON.stringify(response));
+      return;
+    }
+
     try {
       const fn = resolveMethod(api, request.method);
       let response: RPCResponse = {
