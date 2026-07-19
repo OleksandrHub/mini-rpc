@@ -1,7 +1,5 @@
 import "dotenv/config";
 import { readFileSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
 import type { IncomingMessage, ServerResponse } from "node:http";
 
 const AUTH_TOKEN = process.env.MINI_RPC_AUTH_TOKEN;
@@ -9,6 +7,7 @@ const AUTH_TOKEN = process.env.MINI_RPC_AUTH_TOKEN;
 export function getTypesAPI(
   req: IncomingMessage,
   res: ServerResponse,
+  typesPath: string,
 ): boolean {
   if (req.method === "GET" && req.url === "/_internal/types") {
     const token = req.headers["x-cli-auth-token"];
@@ -18,9 +17,6 @@ export function getTypesAPI(
     }
 
     try {
-      const __dirname = dirname(fileURLToPath(import.meta.url));
-      const typesPath = join(__dirname, "../../dist/demo/api.d.ts");
-
       const typesContent = readFileSync(typesPath, "utf-8");
 
       res.writeHead(200, { "Content-Type": "application/json" });

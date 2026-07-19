@@ -1,4 +1,5 @@
 import { createServer } from "node:http";
+import { dirname, join, basename } from "node:path";
 import type { RPCRequest, RPCResponse } from "@mini-rpc/core";
 import {
   readBody,
@@ -8,17 +9,32 @@ import {
   getTypesAPI,
 } from "./utilities/index.js";
 
+export interface CreateRPCServerOptions {
+  apiSourcePath?: string;
+  typesPath?: string;
+}
+
 export function createRPCServer<TAPI extends object>(
   api: TAPI,
   port: number,
-  addTypesAPI: boolean = true,
+  options: CreateRPCServerOptions = {},
 ) {
-  if (addTypesAPI) {
-    ensureTypesCompiled();
+  const { apiSourcePath } = options;
+  const typesPath =
+    options.typesPath ??
+    (apiSourcePath
+      ? join(
+          dirname(apiSourcePath),
+          basename(apiSourcePath).replace(/\.tsx?$/, ".d.ts"),
+        )
+      : undefined);
+
+  if (apiSourcePath && typesPath) {
+    ensureTypesCompiled(apiSourcePath, typesPath);
   }
 
   const server = createServer(async (req, res) => {
-    if (addTypesAPI && getTypesAPI(req, res)) {
+    if (typesPath && getTypesAPI(req, res, typesPath)) {
       return;
     }
 
