@@ -3,4 +3,7 @@ export const api = {
   users: {
     get: (id: number) => ({ id, name: `User ${id}` }),
   },
+  errorMethod: () => {
+    throw new Error("This is a test error");
+  }
 };
